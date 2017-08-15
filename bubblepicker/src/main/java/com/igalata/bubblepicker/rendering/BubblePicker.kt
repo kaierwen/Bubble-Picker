@@ -59,6 +59,13 @@ class BubblePicker : GLSurfaceView {
             field = value
             renderer.centerImmediately = value
         }
+    /**
+     * Is need swipe function
+     */
+    var enableSwipe = false
+        set(value) {
+            field = value
+        }
 
     private val renderer = PickerRenderer(this)
     private var startX = 0f
@@ -90,7 +97,7 @@ class BubblePicker : GLSurfaceView {
                 renderer.release()
             }
             MotionEvent.ACTION_MOVE -> {
-                if (isSwipe(event)) {
+                if (isSwipe(event) && enableSwipe) {
                     renderer.swipe(previousX - event.x, previousY - event.y)
                     previousX = event.x
                     previousY = event.y
@@ -123,5 +130,4 @@ class BubblePicker : GLSurfaceView {
 
         array.recycle()
     }
-
 }
